@@ -9,7 +9,7 @@ The ~get-in~ function can be used to look up values in nested maps:
 ; => "World"
 #+end_src
 
-To look up a value in a value in a map, provide the key(word) to look up as a function. Using this method, it's still possible to provide a default value as second argument:
+To look up a value in a map, provide the key(word) to look up as a function. Using this method, it's still possible to provide a default value as second argument:
 #+begin_src clojure
 (:a {:a "Hello" :b "World"})
 ; => "Hello"
