@@ -1,0 +1,70 @@
+#+TITLE: Clojure for the Brave and True
+#+AUTHOR: Sam Wolfs
+
+** Maps
+The ~get-in~ function can be used to look up values in nested maps:
+
+#+begin_src clojure
+(get-in {:a "Hello" :b {:c "World"}} [:b :c])
+; => "World"
+#+end_src
+
+To look up a value in a value in a map, provide the key(word) to look up as a function. Using this method, it's still possible to provide a default value as second argument:
+#+begin_src clojure
+(:a {:a "Hello" :b "World"})
+; => "Hello"
+(:b {:a "Hello"} "World")
+; => "World"
+#+end_src
+
+** Vectors (aka Tuples)
+Vectors represent 0-indexed collections, analogous to tuples in other languages:
+#+begin_src clojure
+[:a "Hello World" 42]
+; Retrieve value by index
+(get [:a "Hello World" 42] 2)
+; => 42
+; Create a vector
+(vector :a :b :c)
+; => [:a :b :c]
+; Append to a vector
+(conj [:a :b] :c)
+; => [:a :b :c]
+#+end_src
+
+** Lists
+Use the ~nth~ function to retrieve a value by index; this is less performant than ~get~ in (i.e.) vectors, since it requires traversing the entire list:
+#+begin_src clojure
+(nth '(:a :b :c) 0)
+; => :a
+; Append to a list
+(conj '(:b :c) :a)
+; => (:a :b :c)
+#+end_src
+
+** Functions
+You can define functions using the ~defn~ special form:
+#+begin_src clojure
+(defn hello-world
+  "Greets the world and everyone in it."
+  []
+  (println "Hello, World!"))
+(hello-world)
+; => "Hello, World!"
+#+end_src
+
+A function definition consists of:
+- a function name
+- an optional docstring
+- a vector of function arguments
+- the function body
+
+*** Multi-arity functions
+A multi-arity function can be defined by adding multiple argument-body clauses to a ~defn~ form:
+#+begin_src clojure
+(defn greeting
+  ([] (greeting "World"))
+  ([subject] (println (str "Hello, " subject "!"))))
+#+end_src
+
+*** Argument destructuring
